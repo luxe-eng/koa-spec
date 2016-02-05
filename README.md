@@ -2,3 +2,4 @@
 [![Build Status](https://travis-ci.org/luxe-eng/koa-spec.svg?branch=master)](https://travis-ci.org/luxe-eng/koa-spec)
 [![Coverage Status](https://coveralls.io/repos/github/luxe-eng/koa-spec/badge.svg?branch=master)](https://coveralls.io/github/luxe-eng/koa-spec?branch=master)
 [![Dependency Status](https://david-dm.org/luxe-eng/koa-spec.svg)](https://david-dm.org/luxe-eng/koa-spec)
+[![License](http://img.shields.io/:license-apache-blue.svg?style=flat)](LICENSE.md)
