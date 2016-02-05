@@ -1,0 +1,45 @@
+{
+  "name": "koa-spec",
+  "version": "0.0.1",
+  "description": "OpenAPI Specification koa middleware.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --reporter spec",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luxe-eng/koa-spec.git"
+  },
+  "keywords": [
+    "koa",
+    "open",
+    "api",
+    "spec",
+    "specification",
+    "swagger"
+  ],
+  "author": "Nicolas Gramlich <nicolas@luxe.com> (http://www.luxe.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/luxe-eng/koa-spec/issues"
+  },
+  "maintainers": [
+    {
+      "name": "Nicolas Gramlich",
+      "email": "nicolas@luxe.com"
+    },
+    {
+      "name": "Nicolas Gramlich",
+      "email": "nicolasgramlich@gmail.com"
+    }
+  ],
+  "homepage": "https://github.com/luxe-eng/koa-spec#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "2.11.6",
+    "istanbul": "^0.4.2",
+    "mocha": "2.4.5",
+    "mocha-lcov-reporter": "1.0.0"
+  }
+}
