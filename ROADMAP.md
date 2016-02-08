@@ -1,6 +1,6 @@
 # Roadmap
-- [ ] YAML Parsing
-- [ ] `$ref` Resolving
+- [x] YAML Parsing
+- [x] `$ref` Resolving
 - [ ] Routing
 - [ ] Parameter Validation
 - [ ] Response Validation
