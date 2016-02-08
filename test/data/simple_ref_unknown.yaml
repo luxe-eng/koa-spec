@@ -1,0 +1,12 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Simple API with $ref.
+paths:
+  /:
+    get:
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Unknown'
