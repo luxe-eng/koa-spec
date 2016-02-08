@@ -1,0 +1,29 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Single number (double) query parameter.
+paths:
+  /items:
+    get:
+      x-controller: ItemController
+      x-controller-method: getByQueryId
+      parameters:
+        - name: id
+          in: query
+          description: The id of item.
+          type: number
+          format: double
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Item'
+definitions:
+  Item:
+    title: Item
+    type: object
+    properties:
+      id:
+        type: number
+        format: double
+        example: 1
