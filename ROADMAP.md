@@ -1,6 +1,12 @@
 # Roadmap
-- [ ] YAML Parsing
-- [ ] `$ref` Resolving
+- [x] YAML Parsing
+- [x] `$ref` Resolving
+  - [x] local
+  - [ ] relative
+  - [ ] remote
 - [ ] Routing
-- [ ] Parameter Validation
-- [ ] Response Validation
+- [ ] Validation
+  - [ ] Parameter
+  - [ ] Response
+  - [ ] Produces
+  - [ ] Consumes

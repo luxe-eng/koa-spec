@@ -1,5 +1,6 @@
 [![npm version](https://badge.fury.io/js/koa-spec.svg)](https://badge.fury.io/js/koa-spec)
 [![Build Status](https://travis-ci.org/luxe-eng/koa-spec.svg?branch=master)](https://travis-ci.org/luxe-eng/koa-spec)
+ [![GitHub Issues](https://img.shields.io/github/issues/luxe-eng/koa-spec.svg)](https://github.com/luxe-eng/koa-spec/issues?q=is%3Aopen)
 [![Coverage Status](https://coveralls.io/repos/github/luxe-eng/koa-spec/badge.svg?branch=master)](https://coveralls.io/github/luxe-eng/koa-spec?branch=master)
 [![Dependency Status](https://david-dm.org/luxe-eng/koa-spec.svg)](https://david-dm.org/luxe-eng/koa-spec)
-[![License](http://img.shields.io/:license-apache-blue.svg?style=flat)](LICENSE.md)
+[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](LICENSE.txt)
