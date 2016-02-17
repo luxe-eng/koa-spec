@@ -14,3 +14,42 @@
 ```
 $ npm install --save koa-spec
 ```
+
+## Example
+
+### api.yaml
+```yaml
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Simple.
+paths:
+  /:
+    get:
+      x-controller: IndexController
+      x-controller-method: get
+      responses:
+        200:
+          description: OK
+```
+
+### IndexController.js
+```javascript
+'use strict';
+
+module.exports.get = function* () {
+  this.body = { success : true };
+};
+```
+
+### app.js
+```javascript
+const app = koa();
+const koaspec = require('koa-spec');
+
+const spec = koaspec('api.yaml');
+const router = spec.router();
+app.use(router.routes());
+
+app.listen(8000);
+```
