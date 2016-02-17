@@ -46,6 +46,7 @@
     "koa-bodyparser": "2.0.1",
     "mocha": "2.4.5",
     "mocha-lcov-reporter": "1.0.0",
+    "mockery": "1.4.0",
     "supertest": "1.1.0",
     "supertest-as-promised": "2.0.2"
   },
