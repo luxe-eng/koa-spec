@@ -59,3 +59,9 @@ app.use(router.routes());
 
 app.listen(8000);
 ```
+
+### Result
+```bash
+$ curl localhost:8000 ⏎
+{"success":true}
+```
