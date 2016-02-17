@@ -25,7 +25,7 @@ $ node examples/simple/app.js ⏎
 ### Basic Example
 This is the most simple example showing basic routing (i.e. no parameter or response validation).
 
-#### api.yaml
+#### (data/)api.yaml
 ```yaml
 swagger: '2.0'
 info:
@@ -41,7 +41,7 @@ paths:
           description: OK
 ```
 
-#### IndexController.js
+#### (controllers/)IndexController.js
 ```javascript
 'use strict';
 
@@ -55,13 +55,11 @@ module.exports.get = function* () {
 'use strict';
 
 const koa = require('koa');
-const koaspec = require('../..'); // 'koa-spec'
+const koaspec = require('koa-spec');
 
 const app = koa();
 
-const OPTIONS = { routerOptions : { controllerDirectory : __dirname + '/controllers' } };
-
-const spec = koaspec(__dirname + '/data/api.yaml', OPTIONS);
+const spec = koaspec('data/api.yaml');
 const router = spec.router();
 app.use(router.routes());
 
