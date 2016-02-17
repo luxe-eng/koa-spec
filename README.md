@@ -44,6 +44,8 @@ module.exports.get = function* () {
 
 ### app.js
 ```javascript
+'use strict';
+
 const app = koa();
 const koaspec = require('koa-spec');
 
