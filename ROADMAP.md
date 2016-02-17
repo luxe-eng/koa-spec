@@ -32,3 +32,5 @@
   - [ ] Response
   - [ ] Produces
   - [ ] Consumes
+- [ ] Error-Handling (throw early, throw often)
+- [ ] Spread out `strictMode` usage 
