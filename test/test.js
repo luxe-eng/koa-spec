@@ -92,7 +92,24 @@ describe('koaspec', function () {
   });
 
   describe('router', function () {
-    it.skip('throws when koa-router is not available.');
+    describe('dependencies', function () {
+      before(function () {
+        mockery.enable();
+        mockery.warnOnUnregistered(false);
+        mockery.registerMock('koa-router', null);
+      });
+
+      it('throws when koa-router is not available.', function* () {
+        const spec = koaspec('test/data/body_parameter_object.yaml', OPTIONS_TEST);
+
+        expect(spec.router.bind(spec)).to.throw(`koa-router`);
+      });
+
+      after(function () {
+        mockery.deregisterMock('koa-router');
+        mockery.disable();
+      });
+    });
 
     it('throws on an unknown method type.', function* () {
       const spec = koaspec('test/data/unknown_method_type.yaml', OPTIONS_TEST);
