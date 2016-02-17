@@ -4,9 +4,31 @@
   - [x] local
   - [ ] relative
   - [ ] remote
-- [ ] Routing
+- [x] Routing
 - [ ] Validation
   - [ ] Parameter
+    - [ ] Sources
+      - [ ] Header
+      - [ ] Path
+      - [ ] Query
+      - [ ] Body
+    - [ ] Types
+      - [ ] Integer
+        - [ ] int32 (int)
+        - [ ] int64 (long)
+      - [ ] Number
+        - [ ] float
+        - [ ] double
+      - [ ] String
+        - [ ] string
+        - [ ] byte
+        - [ ] binary
+        - [ ] UUID (V1/V4)
+        - [ ] ISBN (10/13)
+        - [ ] date (ISO8601)
+        - [ ] date-time (ISO8601)
+      - [ ] Boolean
+        - [ ] boolean
   - [ ] Response
   - [ ] Produces
   - [ ] Consumes
