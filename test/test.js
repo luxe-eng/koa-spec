@@ -3,11 +3,13 @@
 const debug = require('debug')('koa-spec-test');
 const _ = require('lodash');
 const path = require('path');
+const mockery = require('mockery');
 const koa = require('koa');
 const http = require('http');
 const HTTPStatus = require('http-status');
-const koaspec = require('../');
 const supertest = require('supertest-as-promised');
+
+const koaspec = require('../');
 const ERROR_CODES = require('../lib/errors').CODES;
 
 const OPTIONS_TEST = {
@@ -388,7 +390,24 @@ describe('koaspec', function () {
       });
 
       describe('body', function () {
-        it.skip('throws when koa-bodyparser is not available.');
+        describe('dependencies', function () {
+          before(function () {
+            mockery.enable();
+            mockery.warnOnUnregistered(false);
+            mockery.registerMock('koa-bodyparser', null);
+          });
+
+          it('throws when koa-bodyparser is not available and calling a  to use the router.', function* () {
+            const spec = koaspec('test/data/body_parameter_object.yaml', OPTIONS_TEST);
+
+            expect(spec.router.bind(spec)).to.throw(`koa-bodyparser`);
+          });
+
+          after(function () {
+            mockery.deregisterMock('koa-bodyparser');
+            mockery.disable();
+          });
+        });
 
         it('supports simple object body parameters.', function* () {
           const bodyParser = require('koa-bodyparser');
