@@ -38,7 +38,7 @@ paths:
 'use strict';
 
 module.exports.get = function* () {
-  this.body = { success : true };
+  this.body = { index : 'Hello koa-spec!' };
 };
 ```
 
@@ -46,10 +46,14 @@ module.exports.get = function* () {
 ```javascript
 'use strict';
 
-const app = koa();
-const koaspec = require('koa-spec');
+const koa = require('koa');
+const koaspec = require('../..'); // 'koa-spec'
 
-const spec = koaspec('api.yaml');
+const app = koa();
+
+const OPTIONS = { routerOptions : { controllerDirectory : __dirname + '/controllers' } };
+
+const spec = koaspec(__dirname + '/data/api.yaml', OPTIONS);
 const router = spec.router();
 app.use(router.routes());
 
