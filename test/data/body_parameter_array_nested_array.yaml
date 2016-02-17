@@ -1,0 +1,73 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Array body parameter.
+paths:
+  /books/many:
+    post:
+      x-controller: BookController
+      x-controller-method: createFromBodyArray
+      parameters:
+        - $ref: '#/parameters/Books'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Books'
+parameters:
+  Books:
+    name: books
+    description: 'Overly simplified book array.'
+    in: body
+    required: true
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/BookBlueprint'
+definitions:
+  BookBlueprint:
+    title: BookBlueprint
+    type: object
+    required:
+      - isbn
+      - authors
+    properties:
+      isbn:
+        type: string
+        format: isbn
+        example: '978-3-16-148410-0'
+      authors:
+        type: array
+        items:
+          $ref: '#/definitions/Author'
+  Book:
+    title: Book
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
+      isbn:
+        type: string
+        format: isbn
+        example: '978-1-84951-899-4'
+      authors:
+        type: array
+        items:
+          $ref: '#/definitions/Author'
+  Books:
+    title: Books
+    type: array
+    items:
+      $ref: '#/definitions/Book'
+  Author:
+    title: Author
+    type: object
+    properties:
+      first_name:
+        type: string
+        example: 'William'
+      last_name:
+        type: string
+        example: 'Shakespeare'

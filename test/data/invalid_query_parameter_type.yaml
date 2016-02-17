@@ -1,0 +1,29 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Invalid query parameter type.
+paths:
+  /items:
+    get:
+      x-controller: ItemController
+      x-controller-method: getByQueryId
+      parameters:
+        - name: id
+          in: query
+          description: The id of item.
+          type: invalid
+          format: int32
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Item'
+definitions:
+  Item:
+    title: Item
+    type: object
+    properties:
+      id:
+        type: invalid
+        format: int32
+        example: 1
