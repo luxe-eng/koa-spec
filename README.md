@@ -12,12 +12,20 @@
 ## Installation
 
 ```
-$ npm install --save koa-spec
+$ npm install --save koa-spec ⏎
 ```
 
-## Example
+## Examples
 
-### api.yaml
+Various examples can be found in the [/examples](/examples) directory and executed like this:
+```bash
+$ node examples/simple/app.js ⏎
+```
+
+### Basic Example
+This is the most simple example showing basic routing (i.e. no parameter or response validation).
+
+#### api.yaml
 ```yaml
 swagger: '2.0'
 info:
@@ -33,7 +41,7 @@ paths:
           description: OK
 ```
 
-### IndexController.js
+#### IndexController.js
 ```javascript
 'use strict';
 
@@ -42,7 +50,7 @@ module.exports.get = function* () {
 };
 ```
 
-### app.js
+#### app.js
 ```javascript
 'use strict';
 
@@ -60,8 +68,12 @@ app.use(router.routes());
 app.listen(8000);
 ```
 
-### Result
+#### Result
 ```bash
 $ curl localhost:8000 ⏎
-{"success":true}
+```
+```json
+{
+  "index" : "Hello koa-spec!"
+}
 ```
