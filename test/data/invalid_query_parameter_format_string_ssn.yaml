@@ -1,0 +1,29 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Invalid string (ssn) query parameter format.
+paths:
+  /citizens:
+    get:
+      x-controller: CitizenController
+      x-controller-method: getByQuerySSN
+      parameters:
+        - name: ssn
+          in: query
+          description: The ssn of the citizen.
+          type: string
+          format: ssn
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Citizen'
+definitions:
+  Citizen:
+    title: Citizen
+    type: object
+    properties:
+      id:
+        type: string
+        format: ssn
+        example: '000-00-0000'

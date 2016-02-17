@@ -1,0 +1,33 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Single string (isbn) query parameter.
+paths:
+  /books:
+    get:
+      x-controller: BookController
+      x-controller-method: getByQueryISBN
+      parameters:
+        - name: isbn
+          in: query
+          description: The isbn of the book.
+          type: string
+          format: isbn
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Book'
+definitions:
+  Book:
+    title: Book
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
+      isbn:
+        type: string
+        format: isbn
+        example: '978-1-84951-899-4'

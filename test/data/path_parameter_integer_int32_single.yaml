@@ -1,0 +1,29 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Simple integer (int32) path parameter.
+paths:
+  /items/{id}:
+    get:
+      x-controller: ItemController
+      x-controller-method: getByPathId
+      parameters:
+        - name: id
+          in: path
+          description: The id of item.
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Item'
+definitions:
+  Item:
+    title: Item
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        example: 1

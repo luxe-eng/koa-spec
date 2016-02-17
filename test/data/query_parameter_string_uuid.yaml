@@ -1,0 +1,29 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Single string (uuid) query parameter.
+paths:
+  /items:
+    get:
+      x-controller: ItemController
+      x-controller-method: getByQueryUUID
+      parameters:
+        - name: id
+          in: query
+          description: The uuid of item.
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Item'
+definitions:
+  Item:
+    title: Item
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 1

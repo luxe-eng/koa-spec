@@ -1,0 +1,47 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Multiple integer (int32) path parameters.
+paths:
+  /items/{a}/{b}/{c}:
+    get:
+      x-controller: ItemController
+      x-controller-method: getByPathABC
+      parameters:
+        - name: a
+          in: path
+          description: The 'a' of item.
+          type: integer
+          format: int32
+        - name: b
+          in: path
+          description: The 'b' of item.
+          type: integer
+          format: int32
+        - name: c
+          in: path
+          description: The 'c' of item.
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Item'
+definitions:
+  Item:
+    title: Item
+    type: object
+    properties:
+      a:
+        type: integer
+        format: int32
+        example: 1
+      b:
+        type: integer
+        format: int32
+        example: 1
+      c:
+        type: integer
+        format: int32
+        example: 1
