@@ -812,6 +812,28 @@ describe('koaspec', function () {
             expect(actual).to.containSubset(expected);
           });
 
+          it('detects an invalid integer query parameter.', function* () {
+            const app = koa();
+
+            const spec = koaspec('test/data/query_parameter_integer_int32.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .get('/items')
+              .query({
+                id : 3.14159
+              })
+              .expect(HTTPStatus.BAD_REQUEST);
+
+            const actual = res.body;
+            const expected = {
+              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+            };
+            expect(actual).to.containSubset(expected);
+          });
+
           it('detects an out of upper bounds integer (int32) query parameter.', function* () {
             const app = koa();
 
