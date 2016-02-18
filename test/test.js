@@ -724,7 +724,7 @@ describe('koaspec', function () {
             expect(actual).to.containSubset(expected);
           });
 
-          it('detects an invalid integer query parameter format.', function* () {
+          it('detects an invalid string query parameter format.', function* () {
             const app = koa();
 
             const spec = koaspec('test/data/invalid_query_parameter_format_string_ssn.yaml', OPTIONS_TEST);
@@ -749,7 +749,7 @@ describe('koaspec', function () {
           it('detects an invalid number query parameter format.', function* () {
             const app = koa();
 
-            const spec = koaspec('test/data/invalid_query_parameter_format_number_tripple.yaml', OPTIONS_TEST);
+            const spec = koaspec('test/data/invalid_query_parameter_format_number_triple.yaml', OPTIONS_TEST);
 
             const router = spec.router();
             app.use(router.routes());
