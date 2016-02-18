@@ -3,6 +3,7 @@ node_js:
   - "v5.4.1"
 script: "npm run-script test-travis"
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+after_script: "cat ./coverage/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimate.js"
 addons:
     code_climate:
         repo_token: 9111f5477047e3564cd1a30bed8affe48eb781bcfcac857310d13c10cc95700c
