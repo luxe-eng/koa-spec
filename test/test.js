@@ -168,16 +168,22 @@ describe('koaspec', function () {
       expect(spec.router.bind(spec)).to.throw(`Controller 'UnknownControllerName' does not exist.`);
     });
 
+    it('throws for controller method that can not be found when strict mode is enabled.', function* () {
+      const spec = koaspec('test/data/unknown_controller_method.yaml', OPTIONS_TEST);
+
+      expect(spec.router.bind(spec)).to.throw(`Controller 'IndexController' does not have a method 'getNotImplemented'.`);
+    });
+
     it('throws for not defining a controller when strict mode is enabled.', function* () {
       const spec = koaspec('test/data/no_controller.yaml', OPTIONS_TEST);
 
-      expect(spec.router.bind(spec)).to.throw(`Controller 'undefined' does not exist.`);
+      expect(spec.router.bind(spec)).to.throw(`Controller name not specified.`);
     });
 
     it('throws for not defining a controller method when strict mode is enabled.', function* () {
       const spec = koaspec('test/data/no_controller_method.yaml', OPTIONS_TEST);
 
-      expect(spec.router.bind(spec)).to.throw(`Controller 'IndexController' does not have a method 'undefined'.`);
+      expect(spec.router.bind(spec)).to.throw(`Controller 'IndexController' method name not specified.`);
     });
 
     it('uses strict mode by default.', function* () {
@@ -188,7 +194,31 @@ describe('koaspec', function () {
       expect(spec.router.bind(spec)).to.throw(`Controller 'IndexController' does not have a method 'getNotImplemented'.`);
     });
 
-    it('provides fallback for not implemented routes when strict mode is disabled.', function* () {
+    it('provides fallback for not implemented routes (unknown controller) when strict mode is disabled.', function* () {
+      const app = koa();
+
+      const options = _.merge({}, OPTIONS_TEST, {
+        routerOptions : {
+          strictMode : false
+        }
+      });
+      const spec = koaspec('test/data/unknown_controller.yaml', options);
+
+      const router = spec.router();
+      app.use(router.routes());
+
+      const res = yield supertest(http.createServer(app.callback()))
+        .get('/')
+        .expect(HTTPStatus.NOT_IMPLEMENTED);
+
+      const actual = res.body;
+      const expected = {
+        code : ERROR_CODES.ROUTE_NOT_IMPLEMENTED
+      };
+      expect(actual).to.containSubset(expected);
+    });
+
+    it('provides fallback for not implemented routes (unknown controller method) when strict mode is disabled.', function* () {
       const app = koa();
 
       const options = _.merge({}, OPTIONS_TEST, {
