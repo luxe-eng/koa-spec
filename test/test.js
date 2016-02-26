@@ -512,7 +512,7 @@ describe('koaspec', function () {
 
           app.use(bodyParser());
 
-          const spec = koaspec('test/data/body_parameter_object_nested_array.yaml', OPTIONS_TEST);
+          const spec = koaspec('test/data/body_parameter_object_nested_object.yaml', OPTIONS_TEST);
 
           const router = spec.router();
           app.use(router.routes());
@@ -520,40 +520,64 @@ describe('koaspec', function () {
           const res = yield supertest(http.createServer(app.callback()))
             .post('/books')
             .send({
-              isbn    : '978-1-84951-899-4',
-              authors : [
-                {
-                  first_name : 'Schroeder',
-                  last_name  : 'Schroeder'
-                },
-                {
-                  first_name : 'Brian',
-                  last_name  : 'Broyles'
-                }
-              ]
+              isbn      : '978-1-84951-899-4',
+              publisher : {
+                name : 'Packt Publishing'
+              }
             })
             .expect(HTTPStatus.OK);
 
           const actual = res.body;
 
           const expected = {
-            id      : 1,
-            isbn    : '978-1-84951-899-4',
-            authors : [
-              {
-                first_name : 'Schroeder',
-                last_name  : 'Schroeder'
-              },
-              {
-                first_name : 'Brian',
-                last_name  : 'Broyles'
-              }
-            ]
+            id        : 1,
+            isbn      : '978-1-84951-899-4',
+            publisher : {
+              name : 'Packt Publishing'
+            }
           };
           expect(actual).to.containSubset(expected);
         });
 
         it('supports simple array body parameters.', function* () {
+          const bodyParser = require('koa-bodyparser');
+          const app = koa();
+
+          app.use(bodyParser());
+
+          const spec = koaspec('test/data/body_parameter_array.yaml', OPTIONS_TEST);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .post('/books/many')
+            .send([
+              {
+                isbn : '978-1-84951-899-4'
+              },
+              {
+                isbn : '978-1-78398-596-8'
+              }
+            ])
+            .expect(HTTPStatus.OK);
+
+          const actual = res.body;
+
+          const expected = [
+            {
+              id   : 1,
+              isbn : '978-1-84951-899-4'
+            },
+            {
+              id   : 2,
+              isbn : '978-1-78398-596-8'
+            }
+          ];
+          expect(actual).to.containSubset(expected);
+        });
+
+        it('supports complex array body parameters.', function* () {
           const bodyParser = require('koa-bodyparser');
           const app = koa();
 
@@ -617,44 +641,6 @@ describe('koaspec', function () {
                   last_name  : 'Posch'
                 }
               ]
-            }
-          ];
-          expect(actual).to.containSubset(expected);
-        });
-
-        it('supports complex array body parameters.', function* () {
-          const bodyParser = require('koa-bodyparser');
-          const app = koa();
-
-          app.use(bodyParser());
-
-          const spec = koaspec('test/data/body_parameter_array.yaml', OPTIONS_TEST);
-
-          const router = spec.router();
-          app.use(router.routes());
-
-          const res = yield supertest(http.createServer(app.callback()))
-            .post('/books/many')
-            .send([
-              {
-                isbn : '978-1-84951-899-4'
-              },
-              {
-                isbn : '978-1-78398-596-8'
-              }
-            ])
-            .expect(HTTPStatus.OK);
-
-          const actual = res.body;
-
-          const expected = [
-            {
-              id   : 1,
-              isbn : '978-1-84951-899-4'
-            },
-            {
-              id   : 2,
-              isbn : '978-1-78398-596-8'
             }
           ];
           expect(actual).to.containSubset(expected);
