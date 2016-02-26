@@ -545,7 +545,7 @@ describe('koaspec', function () {
 
           app.use(bodyParser());
 
-          const spec = koaspec('test/data/body_parameter_object_circular.yaml', OPTIONS_TEST);
+          const spec = koaspec('test/data/body_parameter_object_circular_object.yaml', OPTIONS_TEST);
 
           const router = spec.router();
           app.use(router.routes());
@@ -687,6 +687,58 @@ describe('koaspec', function () {
               ]
             }
           ];
+          expect(actual).to.containSubset(expected);
+        });
+
+        it('supports circular array body parameters.', function* () {
+          const bodyParser = require('koa-bodyparser');
+          const app = koa();
+
+          app.use(bodyParser());
+
+          const spec = koaspec('test/data/body_parameter_array_circular_array.yaml', OPTIONS_TEST);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .post('/persons')
+            .send({
+              id        : 1,
+              name      : 'Child',
+              relatives : [
+                {
+                  id        : 2,
+                  name      : 'Father',
+                  relatives : [
+                    {
+                      id   : 3,
+                      name : 'Grandmother'
+                    }
+                  ]
+                }
+              ]
+            })
+            .expect(HTTPStatus.OK);
+
+          const actual = res.body;
+
+          const expected = {
+            id        : 1,
+            name      : 'Child',
+            relatives : [
+              {
+                id     : 2,
+                name   : 'Father',
+                relatives : [
+                  {
+                    id   : 3,
+                    name : 'Grandmother'
+                  }
+                ]
+              }
+            ]
+          };
           expect(actual).to.containSubset(expected);
         });
       });

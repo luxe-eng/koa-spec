@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: 0.0.1
-  title: Object parameter with circular dependency.
+  title: Object parameter with circular object dependency.
 paths:
   /persons:
     post:
@@ -17,7 +17,7 @@ paths:
 parameters:
   Person:
     name: person
-    description: 'Object with circular dependency.'
+    description: 'Object with circular object dependency.'
     in: body
     required: true
     schema:
