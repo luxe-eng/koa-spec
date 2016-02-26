@@ -728,8 +728,8 @@ describe('koaspec', function () {
             name      : 'Child',
             relatives : [
               {
-                id     : 2,
-                name   : 'Father',
+                id        : 2,
+                name      : 'Father',
                 relatives : [
                   {
                     id   : 3,
