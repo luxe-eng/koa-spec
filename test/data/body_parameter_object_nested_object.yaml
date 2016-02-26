@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: 0.0.1
-  title: Object body parameter.
+  title: Object body parameter with nested object.
 paths:
   /books:
     post:
@@ -26,11 +26,16 @@ definitions:
   BookBlueprint:
     title: BookBlueprint
     type: object
+    required:
+      - isbn
+      - publisher
     properties:
       isbn:
         type: string
         format: isbn
         example: '978-3-16-148410-0'
+      publisher:
+        $ref: '#/definitions/Publisher'
   Book:
     title: Book
     type: object
@@ -43,3 +48,12 @@ definitions:
         type: string
         format: isbn
         example: '978-1-84951-899-4'
+      publisher:
+        $ref: '#/definitions/Publisher'
+  Publisher:
+    title: Author
+    type: object
+    properties:
+      name:
+        type: string
+        example: 'Packt Publishing'
