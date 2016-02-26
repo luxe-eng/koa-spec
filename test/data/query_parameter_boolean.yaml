@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: 0.0.1
-  title: Single string (uuid) query parameter.
+  title: Single boolean query parameter.
 paths:
   /items:
     get:
@@ -10,9 +10,8 @@ paths:
       parameters:
         - name: id
           in: query
-          description: The uuid of item.
-          type: string
-          format: uuid
+          description: The id of item.
+          type: boolean
       responses:
         200:
           description: OK
@@ -24,6 +23,5 @@ definitions:
     type: object
     properties:
       id:
-        type: string
-        format: uuid
-        example: 1
+        type: boolean
+        example: true
