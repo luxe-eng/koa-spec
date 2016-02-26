@@ -11,7 +11,6 @@
 [![GitHub Issues](https://img.shields.io/github/issues/luxe-eng/koa-spec.svg)](https://github.com/luxe-eng/koa-spec/issues?q=is%3Aopen)
 [![License](https://img.shields.io/npm/l/koa-spec.svg)](LICENSE.txt)
 
-
 ## Installation
 
 ```
@@ -78,3 +77,44 @@ $ curl localhost:8000 ⏎
   "index" : "Hello koa-spec!"
 }
 ```
+
+## Features/Roadmap
+
+- [x] YAML Parsing
+- [x] `$ref` Resolving
+  - [x] local
+  - [ ] relative
+  - [ ] remote
+  - [x] circular
+- [x] Routing
+- [x] Validation
+  - [ ] Parameter
+    - [ ] Sources
+      - [ ] Header
+      - [x] Path
+      - [x] Query
+      - [x] Body
+  - [ ] Response
+      - [ ] Header
+      - [ ] Body
+  - [ ] Types
+    - [x] Integer
+      - [x] int32 (int)
+      - [x] int64 (long)
+    - [x] Number
+      - [x] float
+      - [x] double
+    - [ ] String
+      - [x] string
+      - [ ] byte
+      - [ ] binary
+      - [x] UUID (V1/V4)
+      - [x] ISBN (10/13)
+      - [ ] date (ISO8601)
+      - [ ] date-time (ISO8601)
+    - [x] Boolean
+      - [x] boolean
+  - [ ] Produces
+  - [ ] Consumes
+- [ ] Error-Handling (throw early, throw often)
+- [ ] Spread out `strictMode` usage 
