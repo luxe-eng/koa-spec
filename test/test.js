@@ -571,7 +571,7 @@ describe('koaspec', function () {
                 isbn    : '978-1-84951-899-4',
                 authors : [
                   {
-                    first_name : 'Schroeder',
+                    first_name : 'Jayme',
                     last_name  : 'Schroeder'
                   },
                   {
@@ -599,7 +599,7 @@ describe('koaspec', function () {
             isbn    : '978-1-84951-899-4',
             authors : [
               {
-                first_name : 'Schroeder',
+                first_name : 'Jayme',
                 last_name  : 'Schroeder'
               },
               {
