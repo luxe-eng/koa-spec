@@ -1,0 +1,56 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Object body parameter.
+paths:
+  /books:
+    post:
+      x-controller: BookController
+      x-controller-method: createFromBody
+      parameters:
+        - $ref: '#/parameters/Book'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Book'
+parameters:
+  Book:
+    name: book
+    description: 'Overly simplified book.'
+    in: body
+    required: true
+    schema:
+      $ref: '#/definitions/BookBlueprint'
+definitions:
+  BookBlueprint:
+    title: BookBlueprint
+    type: object
+    properties:
+      isbn:
+        type: string
+        format: isbn
+        example: '978-3-16-148410-0'
+      publisher:
+        type: string
+        x-nullable: true
+        example: 'Packt Publishing'
+  Book:
+    title: Book
+    type: object
+    required:
+      - id
+      - isbn
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
+      isbn:
+        type: string
+        format: isbn
+        example: '978-1-84951-899-4'
+      publisher:
+        type: string
+        x-nullable: true
+        example: 'Packt Publishing'
