@@ -10,6 +10,7 @@ const HTTPStatus = require('http-status');
 const supertest = require('supertest-as-promised');
 
 const koaspec = require('../');
+const utils = require('../lib/utils');
 const ERROR_CODES = require('../lib/errors').CODES;
 
 const OPTIONS_TEST = {
@@ -303,6 +304,28 @@ describe('koaspec', function () {
       });
 
       describe('query', function () {
+        it('supports boolean query parameters.', function* () {
+          const app = koa();
+
+          const spec = koaspec('test/data/query_parameter_boolean.yaml', OPTIONS_TEST);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .get('/items')
+            .query({
+              id : true
+            })
+            .expect(HTTPStatus.OK);
+
+          const actual = res.body;
+          const expected = {
+            id : true
+          };
+          expect(actual).to.containSubset(expected);
+        });
+
         it('supports integer (int32) query parameters.', function* () {
           const app = koa();
 
@@ -820,6 +843,28 @@ describe('koaspec', function () {
             expect(actual).to.containSubset(expected);
           });
 
+          it('detects an invalid boolean query parameter.', function* () {
+            const app = koa();
+
+            const spec = koaspec('test/data/query_parameter_boolean.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .get('/items')
+              .query({
+                id : 'NotAnProperBooleanString'
+              })
+              .expect(HTTPStatus.BAD_REQUEST);
+
+            const actual = res.body;
+            const expected = {
+              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+            };
+            expect(actual).to.containSubset(expected);
+          });
+
           it('detects an invalid integer query parameter.', function* () {
             const app = koa();
 
@@ -1247,6 +1292,30 @@ describe('koaspec', function () {
             expect(actual).to.containSubset(expected);
           });
         });
+      });
+    });
+  });
+
+  describe('utils', function () {
+    describe('parseBoolean.', function () {
+      it('parses an actual boolean value.', function* () {
+        const actual = utils.parseBoolean(true);
+        expect(actual).to.eql(true);
+      });
+
+      it('parses a "false" string value.', function* () {
+        const actual = utils.parseBoolean('false');
+        expect(actual).to.eql(false);
+      });
+
+      it('parses a "false" string value.', function* () {
+        const actual = utils.parseBoolean('false');
+        expect(actual).to.eql(false);
+      });
+
+      it('parses a "false" string value.', function* () {
+        const actual = utils.parseBoolean({});
+        expect(actual).to.eql(undefined);
       });
     });
   });
