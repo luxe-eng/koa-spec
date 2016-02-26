@@ -539,6 +539,50 @@ describe('koaspec', function () {
           expect(actual).to.containSubset(expected);
         });
 
+        it('supports circular object body parameters.', function* () {
+          const bodyParser = require('koa-bodyparser');
+          const app = koa();
+
+          app.use(bodyParser());
+
+          const spec = koaspec('test/data/body_parameter_object_circular.yaml', OPTIONS_TEST);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .post('/persons')
+            .send({
+              id     : 1,
+              name   : 'Child',
+              father : {
+                id     : 2,
+                name   : 'Father',
+                mother : {
+                  id   : 3,
+                  name : 'Grandmother'
+                }
+              }
+            })
+            .expect(HTTPStatus.OK);
+
+          const actual = res.body;
+
+          const expected = {
+            id     : 1,
+            name   : 'Child',
+            father : {
+              id     : 2,
+              name   : 'Father',
+              mother : {
+                id   : 3,
+                name : 'Grandmother'
+              }
+            }
+          };
+          expect(actual).to.containSubset(expected);
+        });
+
         it('supports simple array body parameters.', function* () {
           const bodyParser = require('koa-bodyparser');
           const app = koa();
@@ -1141,6 +1185,29 @@ describe('koaspec', function () {
             const actual = res.body;
             const expected = {
               code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+            };
+            expect(actual).to.containSubset(expected);
+          });
+
+          it('detects a missing required parameter in an object body parameter.', function* () {
+            const bodyParser = require('koa-bodyparser');
+            const app = koa();
+
+            app.use(bodyParser());
+
+            const spec = koaspec('test/data/body_parameter_object.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .post('/books')
+              .send({})
+              .expect(HTTPStatus.BAD_REQUEST);
+
+            const actual = res.body;
+            const expected = {
+              code : ERROR_CODES.VALIDATION_SOURCE_REQUIRED
             };
             expect(actual).to.containSubset(expected);
           });

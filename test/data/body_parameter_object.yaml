@@ -26,6 +26,8 @@ definitions:
   BookBlueprint:
     title: BookBlueprint
     type: object
+    required:
+      - isbn
     properties:
       isbn:
         type: string
@@ -34,6 +36,9 @@ definitions:
   Book:
     title: Book
     type: object
+    required:
+      - id
+      - isbn
     properties:
       id:
         type: string
