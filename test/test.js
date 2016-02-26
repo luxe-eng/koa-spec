@@ -770,7 +770,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_REQUIRED
+              code : ERROR_CODES.VALIDATION_REQUIRED
             };
             expect(actual).to.containSubset(expected);
           });
@@ -832,7 +832,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -854,7 +854,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -876,7 +876,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -898,7 +898,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -920,7 +920,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_SOURCE
+              code : ERROR_CODES.VALIDATION_SOURCE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -942,7 +942,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -964,7 +964,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -986,7 +986,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1008,7 +1008,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1030,7 +1030,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1052,7 +1052,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1074,7 +1074,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1096,7 +1096,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1118,7 +1118,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1140,7 +1140,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1162,7 +1162,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1184,7 +1184,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_FORMAT
+              code : ERROR_CODES.VALIDATION_FORMAT
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1211,7 +1211,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1236,7 +1236,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1259,7 +1259,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_REQUIRED
+              code : ERROR_CODES.VALIDATION_REQUIRED
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1284,7 +1284,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1309,7 +1309,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1340,7 +1340,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1365,7 +1365,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
@@ -1392,7 +1392,7 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              code : ERROR_CODES.VALIDATION_SOURCE_TYPE
+              code : ERROR_CODES.VALIDATION_TYPE
             };
             expect(actual).to.containSubset(expected);
           });
