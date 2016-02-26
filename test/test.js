@@ -477,7 +477,7 @@ describe('koaspec', function () {
           const actual = res.body;
 
           const expected = {
-            id   : 1,
+            id   : 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
             isbn : '978-1-84951-899-4'
           };
           expect(actual).to.containSubset(expected);
@@ -514,7 +514,7 @@ describe('koaspec', function () {
           const actual = res.body;
 
           const expected = {
-            id      : 1,
+            id      : 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
             isbn    : '978-1-84951-899-4',
             authors : [
               {
@@ -572,7 +572,7 @@ describe('koaspec', function () {
           const actual = res.body;
 
           const expected = [{
-            id      : 1,
+            id      : 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
             isbn    : '978-1-84951-899-4',
             authors : [
               {
@@ -586,7 +586,7 @@ describe('koaspec', function () {
             ]
           },
             {
-              id      : 2,
+              id      : 'BBBBBBBB-CCCC-DDDD-EEEE-FFFFFFFFFFFF',
               isbn    : '978-1-78398-596-8',
               authors : [
                 {
@@ -626,11 +626,11 @@ describe('koaspec', function () {
 
           const expected = [
             {
-              id   : 1,
+              id   : 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE',
               isbn : '978-1-84951-899-4'
             },
             {
-              id   : 2,
+              id   : 'BBBBBBBB-CCCC-DDDD-EEEE-FFFFFFFFFFFF',
               isbn : '978-1-78398-596-8'
             }
           ];
@@ -1246,6 +1246,38 @@ describe('koaspec', function () {
             };
             expect(actual).to.containSubset(expected);
           });
+        });
+      });
+
+      describe('response', function () {
+        it('detects an in valid response code', function* () {
+          const app = koa();
+
+          const spec = koaspec('test/data/invalid_response_code.yaml', OPTIONS_TEST);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .get('/')
+            .expect(HTTPStatus.INTERNAL_SERVER_ERROR); // What is it supposed to return?
+
+          // TODO Check response error...
+        });
+
+        it('detects an in valid response', function* () {
+          const app = koa();
+
+          const spec = koaspec('test/data/invalid_response.yaml', OPTIONS_TEST);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .get('/')
+            .expect(HTTPStatus.INTERNAL_SERVER_ERROR); // What is it supposed to return?
+
+          // TODO Check response error...
         });
       });
     });

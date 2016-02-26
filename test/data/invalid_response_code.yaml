@@ -1,0 +1,22 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Known $ref.
+paths:
+  /:
+    get:
+      x-controller: IndexController
+      x-controller-method: get404
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Index'
+definitions:
+  Index:
+    title: Index
+    type: object
+    properties:
+      hello:
+        type: string
+        example: 'world'
