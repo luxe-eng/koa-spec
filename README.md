@@ -88,6 +88,8 @@ $ curl localhost:8000 ⏎
   - [x] circular
 - [x] Routing
 - [x] Validation
+  - [x] Required
+  - [x] x-nullable
   - [ ] Parameter
     - [ ] Sources
       - [ ] Header
