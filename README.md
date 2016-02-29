@@ -113,7 +113,7 @@ $ curl localhost:8000 ⏎
       - [x] UUID (V1/V4)
       - [x] ISBN (10/13)
       - [ ] date (ISO8601)
-      - [ ] date-time (ISO8601)
+      - [x] date-time (ISO8601)
     - [x] Boolean
       - [x] boolean
   - [ ] Produces
