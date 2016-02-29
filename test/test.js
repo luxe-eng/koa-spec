@@ -414,6 +414,30 @@ describe('koaspec', function () {
           expect(actual).to.containSubset(expected);
         });
 
+        it('supports string (date-time) query parameters.', function* () {
+          const app = koa();
+
+          const spec = koaspec('test/data/query_parameter_string_datetime.yaml', OPTIONS_TEST);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const date = new Date();
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .get('/citizens')
+            .query({
+              date_of_birth : date.toISOString()
+            })
+            .expect(HTTPStatus.OK);
+
+          const actual = res.body;
+          const expected = {
+            date_of_birth : date.toISOString()
+          };
+          expect(actual).to.containSubset(expected);
+        });
+
         it('supports string (uuid) query parameters.', function* () {
           const app = koa();
 
@@ -1135,6 +1159,28 @@ describe('koaspec', function () {
               .get('/items')
               .query({
                 id : -3.4028235E38 * 2
+              })
+              .expect(HTTPStatus.BAD_REQUEST);
+
+            const actual = res.body;
+            const expected = {
+              code : ERROR_CODES.VALIDATION_FORMAT
+            };
+            expect(actual).to.containSubset(expected);
+          });
+
+          it('detects an invalid string (date-time) query parameter.', function* () {
+            const app = koa();
+
+            const spec = koaspec('test/data/query_parameter_string_datetime.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .get('/citizens')
+              .query({
+                date_of_birth : 'July 4th, 1987 10:00'
               })
               .expect(HTTPStatus.BAD_REQUEST);
 

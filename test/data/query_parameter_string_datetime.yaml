@@ -1,0 +1,29 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Invalid string (date-time) query parameter format.
+paths:
+  /citizens:
+    get:
+      x-controller: CitizenController
+      x-controller-method: getByDateOfBirth
+      parameters:
+        - name: date_of_birth
+          in: query
+          description: The date of birth of the citizen.
+          type: string
+          format: date-time
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Citizen'
+definitions:
+  Citizen:
+    title: Citizen
+    type: object
+    properties:
+      date_of_birth:
+        type: string
+        format: date-time
+        example: '2009-02-13T23:31:30+00:00'
