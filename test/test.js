@@ -1289,6 +1289,32 @@ describe('koaspec', function () {
             expect(actual).to.containSubset(expected);
           });
 
+          it('uses default behavior when passing null for a required body property.', function* () {
+            const bodyParser = require('koa-bodyparser');
+            const app = koa();
+
+            app.use(bodyParser());
+
+            const spec = koaspec('test/data/body_parameter_object_property_undefined_nullable.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .post('/books')
+              .send({
+                isbn      : '978-1-84951-899-4',
+                publisher : null
+              })
+              .expect(HTTPStatus.BAD_REQUEST);
+
+            const actual = res.body;
+            const expected = {
+              code : ERROR_CODES.VALIDATION_TYPE
+            };
+            expect(actual).to.containSubset(expected);
+          });
+
           it('allows passing null for an x-nullable required body property.', function* () {
             const bodyParser = require('koa-bodyparser');
             const app = koa();
