@@ -766,6 +766,53 @@ describe('koaspec', function () {
           expect(actual).to.containSubset(expected);
         });
       });
+
+      describe('formData', function () {
+        describe('dependencies', function () {
+          before(function () {
+            mockery.enable();
+            mockery.warnOnUnregistered(false);
+            mockery.registerMock('koa-bodyparser', null);
+          });
+
+          it('throws when koa-bodyparser is not available and a formData parameter is defined.', function* () {
+            const spec = koaspec('test/data/formdata_parameter_integer_int32.yaml', OPTIONS_TEST);
+
+            expect(spec.router.bind(spec)).to.throw(`koa-bodyparser`);
+          });
+
+          after(function () {
+            mockery.deregisterMock('koa-bodyparser');
+            mockery.disable();
+          });
+        });
+
+        it('supports integer (int32) form parameters.', function* () {
+          const bodyParser = require('koa-bodyparser');
+          const app = koa();
+
+          app.use(bodyParser());
+
+          const spec = koaspec('test/data/formdata_parameter_integer_int32.yaml', OPTIONS_TEST);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .post('/items')
+            .type('form')
+            .send({
+              id : 1
+            })
+            .expect(HTTPStatus.OK);
+
+          const actual = res.body;
+          const expected = {
+            id : 1
+          };
+          expect(actual).to.containSubset(expected);
+        });
+      });
     });
 
     describe('validation', function () {

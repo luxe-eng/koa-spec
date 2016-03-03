@@ -96,6 +96,7 @@ $ curl localhost:8000 ⏎
       - [x] Path
       - [x] Query
       - [x] Body
+      - [x] FormData
   - [ ] Response
       - [ ] Header
       - [ ] Body
