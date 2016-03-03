@@ -6,6 +6,12 @@ module.exports.getByQueryId = function* () {
   };
 };
 
+module.exports.getByFormDataId = function* () {
+  this.body = {
+    id : this.request.body.id
+  };
+};
+
 module.exports.getByPathId = function* () {
   this.body = {
     id : this.params.id
