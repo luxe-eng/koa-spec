@@ -491,7 +491,7 @@ describe('koaspec', function () {
             mockery.registerMock('koa-bodyparser', null);
           });
 
-          it('throws when koa-bodyparser is not available and calling a  to use the router.', function* () {
+          it('throws when koa-bodyparser is not available and a body parameter is defined.', function* () {
             const spec = koaspec('test/data/body_parameter_object.yaml', OPTIONS_TEST);
 
             expect(spec.router.bind(spec)).to.throw(`koa-bodyparser`);
