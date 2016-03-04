@@ -10,6 +10,8 @@
 [![npm downloads](https://img.shields.io/npm/dm/koa-spec.svg)](https://www.npmjs.com/package/koa-spec)
 [![GitHub Issues](https://img.shields.io/github/issues/luxe-eng/koa-spec.svg)](https://github.com/luxe-eng/koa-spec/issues?q=is%3Aopen)
 [![License](https://img.shields.io/npm/l/koa-spec.svg)](LICENSE.txt)
+[![Cat Gifs](https://img.shields.io/badge/powered%20by-cat%20gifs%20%F0%9F%90%88-brightgreen.svg)](http://giphy.com/search/cat)
+
 
 ## Installation
 
