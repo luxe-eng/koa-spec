@@ -765,6 +765,41 @@ describe('koaspec', function () {
           };
           expect(actual).to.containSubset(expected);
         });
+
+        it('supports arrays with primitive (non-object) items.', function* () {
+          const bodyParser = require('koa-bodyparser');
+          const app = koa();
+
+          app.use(bodyParser());
+
+          const spec = koaspec('test/data/body_parameter_object_nested_array_string.yaml', OPTIONS_TEST);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .post('/books')
+            .send({
+              isbn    : '978-1-84951-899-4',
+              authors : [
+                'Jayme, Schroeder',
+                'Brian Boyles'
+              ]
+            })
+            .expect(HTTPStatus.OK);
+
+          const actual = res.body;
+
+          const expected = {
+            id        : 1,
+            isbn      : '978-1-84951-899-4',
+            authors : [
+              'Jayme, Schroeder',
+              'Brian Boyles'
+            ]
+          };
+          expect(actual).to.containSubset(expected);
+        });
       });
 
       describe('formData', function () {
