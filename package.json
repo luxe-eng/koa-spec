@@ -1,6 +1,6 @@
 {
   "name": "koa-spec",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "OpenAPI Specification koa middleware.",
   "main": "index.js",
   "scripts": {
