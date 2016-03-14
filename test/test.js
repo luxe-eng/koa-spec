@@ -668,7 +668,7 @@ describe('koaspec', function () {
                   },
                   {
                     first_name : 'Brian',
-                    last_name  : 'Broyles'
+                    last_name  : 'Boyles'
                   }
                 ]
               },
@@ -696,7 +696,7 @@ describe('koaspec', function () {
               },
               {
                 first_name : 'Brian',
-                last_name  : 'Broyles'
+                last_name  : 'Boyles'
               }
             ]
           },

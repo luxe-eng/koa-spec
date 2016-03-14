@@ -17,8 +17,14 @@
     "open",
     "api",
     "spec",
-    "specification",
-    "swagger"
+    "swagger",
+    "oai",
+    "json",
+    "yaml",
+    "validation",
+    "parser",
+    "router",
+    "specification"
   ],
   "author": "Nicolas Gramlich <nicolas@luxe.com> (http://www.luxe.com)",
   "license": "Apache-2.0",
