@@ -44,27 +44,27 @@
   "homepage": "https://github.com/luxe-eng/koa-spec#readme",
   "devDependencies": {
     "chai": "3.5.0",
-    "chai-as-promised": "5.2.0",
-    "chai-subset": "1.2.0",
+    "chai-as-promised": "5.3.0",
+    "chai-subset": "1.2.2",
     "co-mocha": "1.1.2",
     "codeclimate-test-reporter": "0.3.1",
-    "coveralls": "2.11.6",
-    "istanbul": "0.4.2",
-    "koa": "1.1.2",
+    "coveralls": "2.11.9",
+    "istanbul": "0.4.3",
+    "koa": "1.2.0",
     "koa-bodyparser": "2.0.1",
     "mocha": "2.4.5",
-    "mocha-lcov-reporter": "1.0.0",
-    "mockery": "1.4.0",
-    "supertest": "1.1.0",
-    "supertest-as-promised": "2.0.2"
+    "mocha-lcov-reporter": "1.2.0",
+    "mockery": "1.6.2",
+    "supertest": "1.2.0",
+    "supertest-as-promised": "3.1.0"
   },
   "dependencies": {
-    "deasync": "0.1.4",
+    "deasync": "0.1.5",
     "debug": "2.2.0",
-    "http-status": "0.2.0",
-    "js-yaml": "3.5.2",
+    "http-status": "0.2.2",
+    "js-yaml": "3.6.0",
     "json-refs": "2.1.5",
-    "koa-router": "5.3.0",
-    "lodash": "4.2.1"
+    "koa-router": "5.4.0",
+    "lodash": "4.11.1"
   }
 }
