@@ -800,6 +800,68 @@ describe('koaspec', function () {
           };
           expect(actual).to.containSubset(expected);
         });
+
+        describe('supports default values', function () {
+          it('should apply default value', function* () {
+            const bodyParser = require('koa-bodyparser');
+            const app = koa();
+
+            app.use(bodyParser());
+
+            const spec = koaspec('test/data/body_parameter_string_default.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .post('/books')
+              .send({
+                isbn    : '978-1-84951-899-4'
+              })
+              .expect(HTTPStatus.OK);
+
+            const actual = res.body;
+
+            const expected = {
+              id        : 1,
+              isbn      : '978-1-84951-899-4',
+              format    : 'PocketBook'
+            };
+
+            expect(actual).to.containSubset(expected);
+          });
+
+          it('should NOT apply default value', function* () {
+            const bodyParser = require('koa-bodyparser');
+            const app = koa();
+
+            app.use(bodyParser());
+
+            const spec = koaspec('test/data/body_parameter_string_default.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .post('/books')
+              .send({
+                isbn    : '978-1-84951-899-4',
+                format  : 'EBook'
+              })
+              .expect(HTTPStatus.OK);
+
+            const actual = res.body;
+
+            const expected = {
+              id        : 1,
+              isbn      : '978-1-84951-899-4',
+              format    : 'EBook'
+            };
+
+            expect(actual).to.containSubset(expected);
+          });
+        });
+        
       });
 
       describe('formData', function () {
@@ -1617,9 +1679,9 @@ describe('koaspec', function () {
         expect(actual).to.eql(false);
       });
 
-      it('parses a "false" string value.', function* () {
-        const actual = utils.parseBoolean('false');
-        expect(actual).to.eql(false);
+      it('parses a "true" string value.', function* () {
+        const actual = utils.parseBoolean('true');
+        expect(actual).to.eql(true);
       });
 
       it('parses a "false" string value.', function* () {

@@ -12,6 +12,7 @@ module.exports.createFromBody = function* () {
   this.body = {
     id        : 1,
     isbn      : body.isbn,
+    format    : body.format,
     authors   : body.authors,
     publisher : body.publisher
   };
