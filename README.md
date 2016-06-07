@@ -91,6 +91,8 @@ $ curl localhost:8000 ⏎
 - [x] Routing
 - [x] Validation
   - [x] Required
+  - [x] Default values
+    - [x] Body parameter
   - [x] x-nullable
   - [ ] Parameter
     - [ ] Sources
