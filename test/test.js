@@ -502,7 +502,8 @@ describe('koaspec', function () {
             const actual = res.body;
             const expected = {
               id : '1',
-              availability: 'in_stock'
+              availability: 'in_stock',
+              isAvailable: true
             };
             expect(actual).to.containSubset(expected);
           });
@@ -519,7 +520,8 @@ describe('koaspec', function () {
               .get('/books')
               .query({
                 id : 1,
-                availability: 'out_of_stock'
+                availability: 'out_of_stock',
+                isAvailable: false
               })
               .expect(HTTPStatus.OK);
 

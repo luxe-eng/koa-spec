@@ -16,7 +16,12 @@ paths:
           enum:
             - 'in_stock'
             - 'out_of_stock'
-            - 'available_soon'   
+            - 'available_soon'
+        isAvailable:
+          name: isAvailable
+          type: boolean
+          default: true
+          in: query
       responses:
         200:
           description: OK
@@ -31,6 +36,10 @@ definitions:
         type: string
         format: uuid
         example: 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
+      isAvailable:
+        name: isAvailable
+        type: boolean
+        default: true
       availability:
         type: string
         default: 'in_stock'
