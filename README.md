@@ -93,6 +93,8 @@ $ curl localhost:8000 ⏎
   - [x] Required
   - [x] Default values
     - [x] Body parameter
+    - [x] Query string
+    - [ ] Headers
   - [x] x-nullable
   - [ ] Parameter
     - [ ] Sources
