@@ -38,6 +38,10 @@ definitions:
       isFavorite:
         type: boolean
         default: false
+      availableSince:
+        type: string
+        format: date-time
+        default: '2016-06-08T16:59:29.681Z'  
       isbn:
         type: string
         format: isbn
@@ -56,6 +60,9 @@ definitions:
           - 'EBook'
           - 'AudioBook'
           - 'PocketBook'
+      availableSince:
+        type: string
+        format: date-time
       isFavorite:
         type: boolean
       isbn:

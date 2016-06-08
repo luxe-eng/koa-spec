@@ -9,13 +9,15 @@ module.exports.getByQueryISBN = function* () {
 
 module.exports.createFromBody = function* () {
   const body = this.request.body; // TODO Want this to be just "body" not "request.body" ?
+
   this.body = {
-    id        : 1,
-    isbn      : body.isbn,
-    format    : body.format,
-    authors   : body.authors,
-    publisher : body.publisher,
-    isFavorite: body.isFavorite
+    id              : 1,
+    isbn            : body.isbn,
+    format          : body.format,
+    authors         : body.authors,
+    publisher       : body.publisher,
+    isFavorite      : body.isFavorite,
+    availableSince  : body.availableSince
   };
 };
 

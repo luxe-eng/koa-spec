@@ -22,6 +22,12 @@ paths:
           type: boolean
           default: true
           in: query
+        availableSince:
+          name: availableSince
+          type: string
+          format: date-time
+          default: '2016-06-08T17:07:43.631Z'
+          in: query
       responses:
         200:
           description: OK
@@ -37,12 +43,12 @@ definitions:
         format: uuid
         example: 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
       isAvailable:
-        name: isAvailable
         type: boolean
-        default: true
+      availableSince:
+        type: string
+        format: date-time
       availability:
         type: string
-        default: 'in_stock'
         enum:
           - 'in_stock'
           - 'out_of_stock'

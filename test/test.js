@@ -501,9 +501,10 @@ describe('koaspec', function () {
 
             const actual = res.body;
             const expected = {
-              id : '1',
-              availability: 'in_stock',
-              isAvailable: true
+              id              : '1',
+              availability    : 'in_stock',
+              isAvailable     : true,
+              availableSince  : '2016-06-08T17:07:43.631Z'
             };
             expect(actual).to.containSubset(expected);
           });
@@ -519,16 +520,18 @@ describe('koaspec', function () {
             const res = yield supertest(http.createServer(app.callback()))
               .get('/books')
               .query({
-                id : 1,
-                availability: 'out_of_stock',
-                isAvailable: false
+                id	            : 1,
+                availability    : 'out_of_stock',
+                isAvailable     : false,
+                availableSince  : new Date('2016-06-08T17:15:14.731Z')
               })
               .expect(HTTPStatus.OK);
 
             const actual = res.body;
             const expected = {
-              id : '1',
-              availability: 'out_of_stock'
+              id              : '1',
+              availability    : 'out_of_stock',
+              availableSince  : '2016-06-08T17:15:14.731Z'
             };
             expect(actual).to.containSubset(expected);
           });
@@ -877,10 +880,11 @@ describe('koaspec', function () {
             const actual = res.body;
 
             const expected = {
-              id          : 1,
-              isbn        : '978-1-84951-899-4',
-              format      : 'PocketBook',
-              isFavorite  : false      
+              id              : 1,
+              isbn            : '978-1-84951-899-4',
+              format          : 'PocketBook',
+              isFavorite      : false,
+              availableSince  : '2016-06-08T16:59:29.681Z'      
             };
 
             expect(actual).to.containSubset(expected);
@@ -900,19 +904,21 @@ describe('koaspec', function () {
             const res = yield supertest(http.createServer(app.callback()))
               .post('/books')
               .send({
-                isbn        : '978-1-84951-899-4',
-                format      : 'EBook',
-                isFavorite  : true
+                isbn            : '978-1-84951-899-4',
+                format          : 'EBook',
+                isFavorite      : true,
+                availableSince  : new Date('2016-06-08T17:07:43.631Z')
               })
               .expect(HTTPStatus.OK);
 
             const actual = res.body;
 
             const expected = {
-              id          : 1,
-              isbn        : '978-1-84951-899-4',
-              format      : 'EBook',
-              isFavorite  : true
+              id              : 1,
+              isbn            : '978-1-84951-899-4',
+              format          : 'EBook',
+              isFavorite      : true,
+              availableSince  : '2016-06-08T17:07:43.631Z'
             };
 
             expect(actual).to.containSubset(expected);
