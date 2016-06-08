@@ -1,0 +1,40 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Query parameter with default.
+paths:
+  /books:
+    get:
+      x-controller: BookController
+      x-controller-method: get
+      parameters:
+        availability:
+          name: availability
+          type: string
+          default: 'in_stock'
+          in: query
+          enum:
+            - 'in_stock'
+            - 'out_of_stock'
+            - 'available_soon'   
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Book'
+definitions:
+  Book:
+    title: Book
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
+      availability:
+        type: string
+        default: 'in_stock'
+        enum:
+          - 'in_stock'
+          - 'out_of_stock'
+          - 'available_soon'

@@ -35,3 +35,7 @@ module.exports.createFromBodyArray = function* () {
     }
   ];
 };
+
+module.exports.get = function* () {
+  this.body = Object.assign({ id: 1 }, this.request.query);
+};

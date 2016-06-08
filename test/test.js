@@ -481,6 +481,58 @@ describe('koaspec', function () {
           };
           expect(actual).to.containSubset(expected);
         });
+
+        describe('supports default values', function () {
+          
+          it('should apply default value', function* () {
+            const app = koa();
+
+            const spec = koaspec('test/data/query_parameter_defaults.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .get('/books')
+              .query({
+                id : 1
+              })
+              .expect(HTTPStatus.OK);
+
+            const actual = res.body;
+            const expected = {
+              id : '1',
+              availability: 'in_stock'
+            };
+            expect(actual).to.containSubset(expected);
+          });
+
+          it('should NOT apply default value', function* () {
+            const app = koa();
+
+            const spec = koaspec('test/data/query_parameter_defaults.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .get('/books')
+              .query({
+                id : 1,
+                availability: 'out_of_stock'
+              })
+              .expect(HTTPStatus.OK);
+
+            const actual = res.body;
+            const expected = {
+              id : '1',
+              availability: 'out_of_stock'
+            };
+            expect(actual).to.containSubset(expected);
+          });
+
+        });
+
       });
 
       describe('body', function () {
