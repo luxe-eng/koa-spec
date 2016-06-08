@@ -14,7 +14,8 @@ module.exports.createFromBody = function* () {
     isbn      : body.isbn,
     format    : body.format,
     authors   : body.authors,
-    publisher : body.publisher
+    publisher : body.publisher,
+    isFavorite: body.isFavorite
   };
 };
 

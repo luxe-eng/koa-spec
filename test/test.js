@@ -860,7 +860,7 @@ describe('koaspec', function () {
 
             app.use(bodyParser());
 
-            const spec = koaspec('test/data/body_parameter_string_default.yaml', OPTIONS_TEST);
+            const spec = koaspec('test/data/body_parameter_defaults.yaml', OPTIONS_TEST);
 
             const router = spec.router();
             app.use(router.routes());
@@ -875,9 +875,10 @@ describe('koaspec', function () {
             const actual = res.body;
 
             const expected = {
-              id        : 1,
-              isbn      : '978-1-84951-899-4',
-              format    : 'PocketBook'
+              id          : 1,
+              isbn        : '978-1-84951-899-4',
+              format      : 'PocketBook',
+              isFavorite  : false      
             };
 
             expect(actual).to.containSubset(expected);
@@ -889,7 +890,7 @@ describe('koaspec', function () {
 
             app.use(bodyParser());
 
-            const spec = koaspec('test/data/body_parameter_string_default.yaml', OPTIONS_TEST);
+            const spec = koaspec('test/data/body_parameter_defaults.yaml', OPTIONS_TEST);
 
             const router = spec.router();
             app.use(router.routes());
@@ -897,17 +898,19 @@ describe('koaspec', function () {
             const res = yield supertest(http.createServer(app.callback()))
               .post('/books')
               .send({
-                isbn    : '978-1-84951-899-4',
-                format  : 'EBook'
+                isbn        : '978-1-84951-899-4',
+                format      : 'EBook',
+                isFavorite  : true
               })
               .expect(HTTPStatus.OK);
 
             const actual = res.body;
 
             const expected = {
-              id        : 1,
-              isbn      : '978-1-84951-899-4',
-              format    : 'EBook'
+              id          : 1,
+              isbn        : '978-1-84951-899-4',
+              format      : 'EBook',
+              isFavorite  : true
             };
 
             expect(actual).to.containSubset(expected);

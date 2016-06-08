@@ -35,6 +35,9 @@ definitions:
           - 'EBook'
           - 'AudioBook'
           - 'PocketBook'
+      isFavorite:
+        type: boolean
+        default: false
       isbn:
         type: string
         format: isbn
@@ -53,6 +56,8 @@ definitions:
           - 'EBook'
           - 'AudioBook'
           - 'PocketBook'
+      isFavorite:
+        type: boolean
       isbn:
         type: string
         format: isbn
