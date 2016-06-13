@@ -1,0 +1,71 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Body parameter with default.
+paths:
+  /books:
+    post:
+      x-controller: BookController
+      x-controller-method: createFromBody
+      parameters:
+        - $ref: '#/parameters/Book'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Book'
+parameters:
+  Book:
+    name: book
+    description: 'Book with default value.'
+    in: body
+    required: true
+    schema:
+      $ref: '#/definitions/BookBlueprint'
+definitions:
+  BookBlueprint:
+    title: BookBlueprint
+    type: object
+    properties:
+      format:
+        type: string
+        example: 'EBook'
+        default: 'PocketBook'
+        enum:
+          - 'EBook'
+          - 'AudioBook'
+          - 'PocketBook'
+      isFavorite:
+        type: boolean
+        default: false
+      availableSince:
+        type: string
+        format: date-time
+        default: '2016-06-08T16:59:29.681Z'  
+      isbn:
+        type: string
+        format: isbn
+        example: '978-3-16-148410-0'
+  Book:
+    title: Book
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE'
+      format: 
+        type: string
+        enum:
+          - 'EBook'
+          - 'AudioBook'
+          - 'PocketBook'
+      availableSince:
+        type: string
+        format: date-time
+      isFavorite:
+        type: boolean
+      isbn:
+        type: string
+        format: isbn
+        example: '978-1-84951-899-4'

@@ -1,5 +1,9 @@
 'use strict';
 
+/*
+ * This the most simple example of using koa-spec for a simple index page.
+ */
+
 const path = require('path');
 const koa = require('koa');
 const koaspec = require('../..'); // 'koa-spec'
