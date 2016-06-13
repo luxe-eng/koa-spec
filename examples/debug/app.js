@@ -16,15 +16,16 @@ const app = koa();
 
 let errorCount = 0;
 const OPTIONS = {
-  routerOptions            : {
-    controllerDirectory : path.join(__dirname, '/controllers')
-  },
-  requestDebugErrorHandler : function*(ctx, err) {
-    console.err(err);
-    errorCount++;
-    if (errorCount % 1337 === 0) {
-      ctx.status = 418;
-      ctx.body = `I'm a teapot!`;
+  routerOptions : {
+    controllerDirectory      : path.join(__dirname, '/controllers'),
+    requestDebugErrorHandler : function*(ctx, err) {
+      console.err(err);
+
+      errorCount++;
+      if (errorCount % 1337 === 0) {
+        ctx.status = 418;
+        ctx.body = `I'm a teapot!`;
+      }
     }
   }
 };
