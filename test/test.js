@@ -481,6 +481,63 @@ describe('koaspec', function () {
           };
           expect(actual).to.containSubset(expected);
         });
+
+        describe('supports default values', function () {
+          
+          it('should apply default value', function* () {
+            const app = koa();
+
+            const spec = koaspec('test/data/query_parameter_defaults.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .get('/books')
+              .query({
+                id : 1
+              })
+              .expect(HTTPStatus.OK);
+
+            const actual = res.body;
+            const expected = {
+              id              : '1',
+              availability    : 'in_stock',
+              isAvailable     : true,
+              availableSince  : '2016-06-08T17:07:43.631Z'
+            };
+            expect(actual).to.containSubset(expected);
+          });
+
+          it('should NOT apply default value', function* () {
+            const app = koa();
+
+            const spec = koaspec('test/data/query_parameter_defaults.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .get('/books')
+              .query({
+                id	            : 1,
+                availability    : 'out_of_stock',
+                isAvailable     : false,
+                availableSince  : new Date('2016-06-08T17:15:14.731Z')
+              })
+              .expect(HTTPStatus.OK);
+
+            const actual = res.body;
+            const expected = {
+              id              : '1',
+              availability    : 'out_of_stock',
+              availableSince  : '2016-06-08T17:15:14.731Z'
+            };
+            expect(actual).to.containSubset(expected);
+          });
+
+        });
+
       });
 
       describe('body', function () {
@@ -800,6 +857,74 @@ describe('koaspec', function () {
           };
           expect(actual).to.containSubset(expected);
         });
+
+        describe('supports default values', function () {
+          it('should apply default value', function* () {
+            const bodyParser = require('koa-bodyparser');
+            const app = koa();
+
+            app.use(bodyParser());
+
+            const spec = koaspec('test/data/body_parameter_defaults.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .post('/books')
+              .send({
+                isbn    : '978-1-84951-899-4'
+              })
+              .expect(HTTPStatus.OK);
+
+            const actual = res.body;
+
+            const expected = {
+              id              : 1,
+              isbn            : '978-1-84951-899-4',
+              format          : 'PocketBook',
+              isFavorite      : false,
+              availableSince  : '2016-06-08T16:59:29.681Z'      
+            };
+
+            expect(actual).to.containSubset(expected);
+          });
+
+          it('should NOT apply default value', function* () {
+            const bodyParser = require('koa-bodyparser');
+            const app = koa();
+
+            app.use(bodyParser());
+
+            const spec = koaspec('test/data/body_parameter_defaults.yaml', OPTIONS_TEST);
+
+            const router = spec.router();
+            app.use(router.routes());
+
+            const res = yield supertest(http.createServer(app.callback()))
+              .post('/books')
+              .send({
+                isbn            : '978-1-84951-899-4',
+                format          : 'EBook',
+                isFavorite      : true,
+                availableSince  : new Date('2016-06-08T17:07:43.631Z')
+              })
+              .expect(HTTPStatus.OK);
+
+            const actual = res.body;
+
+            const expected = {
+              id              : 1,
+              isbn            : '978-1-84951-899-4',
+              format          : 'EBook',
+              isFavorite      : true,
+              availableSince  : '2016-06-08T17:07:43.631Z'
+            };
+
+            expect(actual).to.containSubset(expected);
+          });
+        });
+        
       });
 
       describe('formData', function () {
@@ -1617,9 +1742,9 @@ describe('koaspec', function () {
         expect(actual).to.eql(false);
       });
 
-      it('parses a "false" string value.', function* () {
-        const actual = utils.parseBoolean('false');
-        expect(actual).to.eql(false);
+      it('parses a "true" string value.', function* () {
+        const actual = utils.parseBoolean('true');
+        expect(actual).to.eql(true);
       });
 
       it('parses a "false" string value.', function* () {
