@@ -857,7 +857,8 @@ describe('koaspec', function () {
 
           const options = _.cloneDeep(OPTIONS_TEST);
           let errCount = 0;
-          options.routerOptions.requestDebugErrorHandler = function*(err) {
+          options.routerOptions.requestDebugErrorHandler = function*(ctx, err) {
+            ctx.status = HTTPStatus.GONE;
             if (err) {
               errCount++
             }
@@ -871,13 +872,7 @@ describe('koaspec', function () {
           const res = yield supertest(http.createServer(app.callback()))
             .get('/items')
             .query({})
-            .expect(HTTPStatus.BAD_REQUEST);
-
-          const actual = res.body;
-          const expected = {
-            code : ERROR_CODES.VALIDATION_REQUIRED
-          };
-          expect(actual).to.containSubset(expected);
+            .expect(HTTPStatus.GONE);
 
           expect(errCount).to.be.eql(1);
         });
