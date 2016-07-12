@@ -1036,6 +1036,33 @@ describe('koaspec', function () {
     });
 
     describe('validation', function () {
+      describe('debugging', function () {
+        it('supports passing in a custom request debug error handler', function* () {
+          const app = koa();
+
+          const options = _.cloneDeep(OPTIONS_TEST);
+          let errCount = 0;
+          options.routerOptions.requestDebugErrorHandler = function*(ctx, err) {
+            ctx.status = HTTPStatus.GONE;
+            if (err) {
+              errCount++
+            }
+          };
+
+          const spec = koaspec('test/data/query_parameter_integer_int32_required.yaml', options);
+
+          const router = spec.router();
+          app.use(router.routes());
+
+          const res = yield supertest(http.createServer(app.callback()))
+            .get('/items')
+            .query({})
+            .expect(HTTPStatus.GONE);
+
+          expect(errCount).to.be.eql(1);
+        });
+      });
+
       describe('parameter', function () {
         describe.skip('header', function () {
           // TODO ....
